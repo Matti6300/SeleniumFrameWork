@@ -1,7 +1,9 @@
 package com.generic.Javautility;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class JavaUtility {
@@ -16,7 +18,7 @@ public class JavaUtility {
 	}
 	
 public String GetSystemDate(String pattern) {
-	java.util.Date da= new java.util.Date();
+	Date da= new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 	   String date= sdf.format(da);
 	   return date;
@@ -24,10 +26,10 @@ public String GetSystemDate(String pattern) {
 
 public String requireddate(int num, String pattern) {
 	
-	Calendar ca = Calendar.getInstance();
+	Calendar ca = Calendar.getInstance();	
 	  
 	ca.add(Calendar.DAY_OF_MONTH, num);
-	java.util.Date da= ca.getTime();
+	Date da= ca.getTime();
 	SimpleDateFormat sdf= new SimpleDateFormat(pattern);
 	String reqdate=sdf.format(da);
 	return reqdate;

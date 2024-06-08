@@ -60,8 +60,8 @@ public class Baseclass_Test {
 	@BeforeClass
 	public void OpeningBrowser() throws IOException {
 
-		driver = wutil.OpenBrowser(driver, putil.GetDataFromPropertyFile("browser"),
-				putil.GetDataFromPropertyFile("url"));
+		driver = wutil.OpenBrowser(driver, System.getProperty("Browser"),
+				System.getProperty("Env"));
       TreadUsage.setDriver(driver);
 		
 		//TreadUsage.setDriver(driver);
@@ -87,6 +87,8 @@ public class Baseclass_Test {
 
 		lp.getUsername().sendKeys(putil.GetDataFromPropertyFile("username"));
 		lp.getPassword().sendKeys(putil.GetDataFromPropertyFile("password"));
+
+		
 		lp.getLoginbtn().click();
 		hp = new HomePage(driver);
 		String actualresult = hp.getHomePageLogo().getText();

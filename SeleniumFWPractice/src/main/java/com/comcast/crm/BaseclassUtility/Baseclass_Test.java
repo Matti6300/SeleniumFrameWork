@@ -60,8 +60,8 @@ public class Baseclass_Test {
 	@BeforeClass
 	public void OpeningBrowser() throws IOException {
 
-		driver = wutil.OpenBrowser(driver, System.getProperty("Browser"),
-				System.getProperty("Env"));
+		driver = wutil.OpenBrowser(driver, putil.GetDataFromPropertyFile("browser"),putil.GetDataFromPropertyFile("url"));
+				
       TreadUsage.setDriver(driver);
 		
 		//TreadUsage.setDriver(driver);

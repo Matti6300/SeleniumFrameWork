@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.IRetryAnalyzer;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
@@ -18,11 +19,14 @@ import com.generic.Javautility.JavaUtility;
 import com.generic.WebDriverutility.WebdriverUtility;
 
 
-public class Listenersusage implements ITestListener, ISuiteListener {
+public class Listenersusage implements ITestListener, ISuiteListener, IRetryAnalyzer {
 	WebdriverUtility wutil= new WebdriverUtility();
 	JavaUtility jutil=new JavaUtility();
 	public ExtentReports reports;
 	public ExtentTest test;
+	
+	private int retryCount=0;
+	private static final int maxretrycount=5;
 	
 	public void onStart(ISuite suite) {
 		String time= new Date().toString().replace(':', '_');
@@ -63,16 +67,11 @@ public class Listenersusage implements ITestListener, ISuiteListener {
 	}
 
 	public void onTestFailure(ITestResult result){
-		
-		
-		
-
 		//String name= result.getMethod().getMethodName();
 		System.out.println(jutil.GetSystemDate("yyyy-MM-dd").replace(':', '_'));
 			TakesScreenshot sh= (TakesScreenshot)TreadUsage.getDriver();
 		String takenpath=	sh.getScreenshotAs(OutputType.BASE64);
-		TreadUsage.getTest().addScreenCaptureFromBase64String(takenpath, "crmReportSS");
-		
+		TreadUsage.getTest().addScreenCaptureFromBase64String(takenpath, "crmReportSS");		
 		System.out.println("on test fail");
 		
 	}
@@ -81,6 +80,16 @@ public class Listenersusage implements ITestListener, ISuiteListener {
 	
 		System.out.println("on test skipped");
 	}
+
+	public boolean retry(ITestResult result) {		
+			if(retryCount<=maxretrycount) {				
+				retryCount++;
+				return true;
+			}		
+		return false;
+	}
+	
+	
 
 	
 

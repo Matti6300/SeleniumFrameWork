@@ -10,7 +10,7 @@ import com.mysql.jdbc.Driver;
 
 public class DataBaseUtility {
 	
-           public 	Connection conn;
+           public Connection conn;
 	
 	public Connection ConnectingToTheDataBase(String url, String username, String password) throws SQLException
 	{
